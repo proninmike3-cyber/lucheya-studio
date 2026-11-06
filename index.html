@@ -183,6 +183,12 @@ body{overflow-x:clip}
 .schedule-under-copy>span{font-size:15px}
 }
 
+
+/* Genuine site-ready images for the two workshop cards, bundled locally in the repository. */
+.event-art .event-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease}
+.event-card:hover .event-art .event-photo{transform:scale(1.04)}
+@media(prefers-reduced-motion:reduce){.event-art .event-photo{transition:none}.event-card:hover .event-art .event-photo{transform:none}}
+
 </style>
   <title>Лучея — студия рисования и творчества в Королёве</title>
   <script type="application/ld+json">
@@ -342,20 +348,7 @@ body{overflow-x:clip}
           <article class="event-card">
             <div class="event-art event-art-carving">
               <span class="event-visual-bubble event-visual-bubble-one">10+</span>
-              <svg viewBox="0 0 600 400" role="img" aria-label="Иллюстрация мастер-класса по карвингу тыквы">
-                <defs><linearGradient id="pumpkinG" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#ffc25e"/><stop offset="1" stop-color="#ec7841"/></linearGradient></defs>
-                <path d="M0 315C126 284 227 351 349 304s189-37 251-4v100H0Z" fill="#ffe8bc"/>
-                <circle cx="467" cy="91" r="48" fill="#fff3d4" opacity=".6"/>
-                <path d="M120 118q-17-55 10-76" fill="none" stroke="#62804c" stroke-width="15" stroke-linecap="round"/>
-                <ellipse cx="125" cy="225" rx="99" ry="117" fill="#729277"/><ellipse cx="126" cy="223" rx="45" ry="115" fill="#9aaa78" opacity=".7"/>
-                <path d="M334 137q-7-66 31-82" fill="none" stroke="#52794c" stroke-width="18" stroke-linecap="round"/>
-                <ellipse cx="358" cy="230" rx="136" ry="145" fill="url(#pumpkinG)"/>
-                <ellipse cx="315" cy="232" rx="68" ry="133" fill="#ffbb5c" opacity=".4"/><ellipse cx="404" cy="230" rx="54" ry="135" fill="#d76638" opacity=".18"/>
-                <path d="M295 206l38-34 30 40-17-6ZM388 207l39-29 11 45-28-16ZM308 272q55 44 104-3q-53 76-104 3Z" fill="#fff0bd"/>
-                <path d="M326 306q31-18 57 2" fill="none" stroke="#963e33" stroke-width="7" stroke-linecap="round"/>
-                <path d="M500 244q15-35 50-27M500 261q13 25 43 24" fill="none" stroke="#e9b857" stroke-width="9" stroke-linecap="round"/>
-                <path d="m80 45 7 20 20 7-20 7-7 20-7-20-20-7 20-7Z" fill="#f6d576"/>
-              </svg>
+              <img class="event-photo" src="assets/masterclass-carving.avif" alt="Резные тыквы с декоративными геометрическими узорами" width="640" height="427" loading="lazy" decoding="async" />
               <span class="event-visual-caption">ТОП ИДЕЙ ДЛЯ ОСЕНИ <span aria-hidden="true"><svg class="ui-icon ui-icon-asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5v19M2.5 12h19M5.3 5.3l13.4 13.4m0-13.4L5.3 18.7" stroke-width="2.5"/></svg></span></span>
             </div>
             <div class="event-card-body">
@@ -369,13 +362,7 @@ body{overflow-x:clip}
           <article class="event-card">
             <div class="event-art event-art-paint">
               <span class="event-visual-bubble event-visual-bubble-two">8+</span>
-              <svg viewBox="0 0 600 400" role="img" aria-label="Иллюстрация росписи гипсовых шкатулок в виде тыквы">
-                <path d="M0 305q150-54 270 7t330-21v109H0Z" fill="#ffeed0"/>
-                <g transform="translate(85 88) rotate(-12 90 110)"><ellipse cx="98" cy="114" rx="95" ry="102" fill="#f5ab43"/><path d="M93 20q-5-27 17-35" stroke="#688f66" stroke-width="15" fill="none"/><path d="M22 86q80-50 146 18M28 129q80-43 142 13" stroke="#624fa4" stroke-width="17" stroke-linecap="round" fill="none"/><path d="m63 156 23-25 25 22 22-25" fill="none" stroke="#355daf" stroke-width="12"/></g>
-                <g transform="translate(315 55) rotate(10 100 110)"><ellipse cx="106" cy="130" rx="100" ry="105" fill="#71b9c6"/><path d="M105 40q-1-25 20-37" stroke="#5b9367" stroke-width="14" fill="none"/><path d="M21 127q42-30 70 4t100-2M30 168q52-30 76-8t80-12" stroke="#cb4b6c" stroke-width="15" fill="none"/><circle cx="61" cy="97" r="12" fill="#f4d572"/><circle cx="162" cy="105" r="12" fill="#f4d572"/></g>
-                <g transform="translate(220 241)"><ellipse cx="92" cy="57" rx="87" ry="65" fill="#e9a441"/><path d="M88 0q0-23 14-29" stroke="#678963" stroke-width="10" fill="none"/><path d="M33 55q52-28 107 5" fill="none" stroke="#bc4f81" stroke-width="13"/><circle cx="87" cy="58" r="14" fill="#fae79b"/></g>
-                <path d="m528 45 11 24 24 11-24 11-11 24-11-24-24-11 24-11Z" fill="#f6cd68"/>
-              </svg>
+              <img class="event-photo" src="assets/masterclass-painted-box.avif" alt="Разноцветные расписные шкатулки-тыквы, изготовленные на мастер-классе" width="640" height="427" loading="lazy" decoding="async" />
               <span class="event-visual-caption">СВОИМИ РУКАМИ <span aria-hidden="true"><svg class="ui-icon ui-icon-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 5.5a5.1 5.1 0 0 0-7.2 0L12 7.1l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2l1.6 1.6L12 21l7.2-6.7 1.6-1.6a5.1 5.1 0 0 0 0-7.2Z"/></svg></span></span>
             </div>
             <div class="event-card-body">
