@@ -135,6 +135,21 @@ body{overflow-x:clip}
 @media(max-width:700px){.schedule-section{padding:82px 0 78px}.schedule-heading{flex-direction:column;align-items:stretch;gap:23px;margin-bottom:25px}.schedule-heading h2{font-size:48px}.schedule-heading .schedule-subtitle{font-size:13px;margin-top:13px}.schedule-control{min-width:0;max-width:none}.schedule-board-header{padding:16px 15px;font-size:9px;letter-spacing:.07em}.schedule-board-period{font-size:9px;text-align:right;max-width:125px}.schedule-board-period span{display:none}.schedule-mobile-days{display:flex;gap:7px;overflow-x:auto;padding:15px 12px;background:#fff9eb;scrollbar-width:none}.schedule-mobile-days::-webkit-scrollbar{display:none}.schedule-mobile-day{border:1px solid #e5dccc;background:#fff;padding:10px 0;min-width:41px;flex:1;border-radius:11px;font-size:11px;font-weight:900;color:#4f5c6f;transition:background .2s}.schedule-mobile-day.is-active{background:#244884;color:white;border-color:#244884}.schedule-grid{display:block}.schedule-day{display:none;border-right:0}.schedule-day.is-active{display:block}.schedule-day-head{min-height:70px;flex-direction:row;gap:12px}.schedule-day-name{font-size:17px}.schedule-day-count{margin-left:auto;margin-right:10px}.schedule-day-slots{min-height:150px;padding:13px}.schedule-slot{padding:16px 17px}.schedule-slot-time{font-size:15px}.schedule-slot-title{font-size:14px}.schedule-slot-sub{font-size:12px}.schedule-board-footer{padding:16px;display:block;font-size:10px}.schedule-board-footer span{display:block;margin:5px 0}.schedule-under{align-items:flex-start;flex-direction:column;gap:18px}.schedule-under .btn{width:100%}.events-section{padding:83px 0}.events-heading{margin-bottom:24px}.events-heading h2{font-size:47px}.events-gallery{grid-template-columns:1fr;gap:18px}.events-archive-label{font-size:9px;max-width:105px;text-align:right}.event-art{height:220px}.event-card-body{padding:21px}.event-card h3{font-size:31px}.event-card p{min-height:unset}.events-next{padding:24px;grid-template-columns:1fr;gap:13px}.events-next-emblem{width:56px;height:56px;font-size:42px}.events-next-actions{grid-column:auto;flex-direction:column;align-items:stretch}.events-next-actions .btn{width:100%}.events-message-link{text-align:center}.events-next h3{font-size:23px}}
 @media(max-width:410px){.schedule-heading h2,.events-heading h2{font-size:42px}.schedule-day-head{padding:13px}.schedule-board-period{max-width:107px}.event-tags span{font-size:10px}.event-visual-bubble{width:49px;height:49px;font-size:18px}}
 
+
+/* Booking modal: one direct MAX CTA */
+.booking-simple-dialog{max-width:460px;padding:43px 40px 40px}
+.booking-simple-dialog .modal-intro{max-width:345px;font-size:13px;line-height:1.75;margin:17px 0 26px}
+.booking-max-link{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:57px;font-size:14px}
+.booking-max-link span{font-size:19px}
+/* Only the button below the schedule can initiate booking */
+.schedule-slot{cursor:default;transition:none}
+.schedule-slot:hover{transform:none;box-shadow:none;border-color:#d5e4ca}
+.schedule-slot.age-school:hover{border-color:#d0dbee}
+.schedule-slot.age-prep:hover{border-color:#f3e0ab}
+.schedule-slot.age-adult:hover{border-color:#ecd6cb}
+.schedule-slot.age-individual:hover{border-color:#d3cdc0}
+@media(max-width:700px){.booking-simple-dialog{padding:36px 24px 29px}.booking-simple-dialog h2{font-size:35px}.booking-simple-dialog .modal-intro{font-size:12px}}
+
 </style>
   <title>Лучея — студия рисования и творчества в Королёве</title>
   <script type="application/ld+json">
@@ -261,7 +276,7 @@ body{overflow-x:clip}
         </div>
         <div class="schedule-under">
           <div><span aria-hidden="true" class="schedule-under-star">✦</span> Не подходит время? <strong>Уточните индивидуальное занятие.</strong></div>
-          <button class="btn btn-blue" type="button" data-open-booking data-course="individual" data-tariff="single">Подобрать время ↗</button>
+          <button class="btn btn-blue" type="button" data-open-booking data-course="individual" data-tariff="single">Подобрать занятие ↗</button>
         </div>
       </div>
     </section>
@@ -367,7 +382,16 @@ body{overflow-x:clip}
 
   <div class="mobile-cta" id="mobile-cta"><button class="btn btn-red" type="button" data-open-booking>Записаться на занятие <span aria-hidden="true">↗</span></button></div>
 
-  <div class="modal" id="booking-modal" hidden aria-hidden="true"><div class="modal-overlay" data-close-modal></div><div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" data-close-modal type="button" aria-label="Закрыть окно">×</button><span class="kicker"><span class="kicker-line"></span> НАЧНЁМ ТВОРИТЬ?</span><h2 id="modal-title">Записаться в <span class="accent-hand">Лучею</span></h2><p class="modal-intro">Расскажите, что вам интересно. Составим сообщение для студии — вы сможете отправить его в удобном мессенджере.</p><form id="booking-form"><label class="form-field">Как к вам обращаться <span>(необязательно)</span><input id="booking-name" type="text" autocomplete="name" placeholder="Например, Мария" maxlength="80" /></label><label class="form-field">Выберите направление<select id="booking-course" required></select></label><label class="form-field">Какой формат интересует?<select id="booking-tariff" required></select></label><label class="form-field">Что хотите уточнить? <span>(необязательно)</span><textarea id="booking-note" rows="2" placeholder="Например, хочу узнать расписание" maxlength="300"></textarea></label><div class="booking-message" id="booking-message" aria-live="polite"></div><div class="modal-actions"><a id="booking-whatsapp" class="btn btn-red" target="_blank" rel="noopener noreferrer" href="https://wa.me/79017515059">Написать в WhatsApp ↗</a><button id="booking-vk" class="btn btn-blue" type="button">Написать ВКонтакте ↗</button></div><p class="modal-note">Сообщение составляется только в вашем браузере. Сайт не хранит и не отправляет ваши данные на сервер. Для ВКонтакте скопируйте текст и вставьте в диалог.</p></form></div></div>
+  <div class="modal" id="booking-modal" hidden aria-hidden="true">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-dialog booking-simple-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" data-close-modal type="button" aria-label="Закрыть окно">×</button>
+    <span class="kicker"><span class="kicker-line"></span> НАЧНЁМ ТВОРИТЬ?</span>
+    <h2 id="modal-title">Записаться в <span class="accent-hand">Лучею</span></h2>
+    <p class="modal-intro">Выбрать занятие, уточнить расписание или записаться можно напрямую в MAX. Просто напишите студии — без анкет и шаблонных сообщений.</p>
+    <a class="btn btn-red booking-max-link" href="https://max.ru/join/eIc6CJDNxi2jjPkFu8zqze1ALUtGEEuCZJd1iFEYWBA" target="_blank" rel="noopener noreferrer">Написать в MAX <span aria-hidden="true">↗</span></a>
+  </div>
+</div>
 
   <div class="lightbox" id="lightbox" hidden aria-hidden="true"><button class="lightbox-close" type="button" aria-label="Закрыть фотографию">×</button><button class="lightbox-prev" type="button" aria-label="Предыдущее фото">‹</button><img id="lightbox-image" alt="" /><button class="lightbox-next" type="button" aria-label="Следующее фото">›</button><span class="lightbox-counter" id="lightbox-counter"></span></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -550,12 +574,10 @@ function renderWeeklySchedule() {
   scheduleGrid.innerHTML = weeklySchedule.map((day,index) => {
     const shown = day.slots.filter(item => filter === 'all' || item.course === filter);
     const slotHTML = shown.map(item =>
-      '<button type="button" class="schedule-slot ' + item.tone + '" data-open-booking data-course="' + item.course +
-      '" data-tariff="' + (item.course === 'individual' ? 'single' : 'trial') +
-      '" aria-label="' + day.name + ', ' + item.time + ', ' + item.title + ', ' + item.note + '. Записаться">' +
+      '<div class="schedule-slot ' + item.tone + '">' +
       '<span class="schedule-slot-time">' + item.time + '</span>' +
       '<span class="schedule-slot-title">' + item.title + '</span>' +
-      '<span class="schedule-slot-sub">' + item.note + ' <span aria-hidden="true">↗</span></span></button>'
+      '<span class="schedule-slot-sub">' + item.note + '</span></div>'
     ).join('');
     return '<div class="schedule-day' +
       (index >= 5 ? ' is-weekend' : '') +
@@ -613,81 +635,24 @@ document.addEventListener('click', e => { if (!e.target.closest('.header-inner')
 window.addEventListener('scroll', () => byId('top').classList.toggle('scrolled', window.scrollY > 25), {passive:true});
 byId('current-year').textContent = new Date().getFullYear();
 
-// Booking modal: all data remains in user's browser; WhatsApp opens with a drafted message.
+// Booking modal: direct MAX link without forms or generated messages.
 const bookingModal = byId('booking-modal');
-const bookingCourse = byId('booking-course');
-const bookingTariff = byId('booking-tariff');
-bookingCourse.innerHTML = courses.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-
-function populateTariffs(tariffId) {
-  const c = getCourse(bookingCourse.value);
-  bookingTariff.innerHTML = c.tariffs.map(t => `<option value="${t.id}">${fullTariffName(t)} — ${money(t.price)}</option>`).join('');
-  if (tariffId && c.tariffs.some(t => t.id === tariffId)) bookingTariff.value = tariffId;
-  updateBookingMessage();
-}
-function bookingText() {
-  const c = getCourse(bookingCourse.value);
-  const t = getTariff(c, bookingTariff.value);
-  const name = byId('booking-name').value.trim();
-  const note = byId('booking-note').value.trim();
-  return `Здравствуйте! Хочу записаться в студию «Лучея».\n\nНаправление: ${c.name}\nФормат: ${fullTariffName(t)} — ${money(t.price)}${name ? `\nМеня зовут: ${name}` : ''}${note ? `\nКомментарий: ${note}` : ''}\n\nПодскажите, пожалуйста, ближайшее свободное время.`;
-}
-function updateBookingMessage() {
-  const message = bookingText();
-  byId('booking-message').textContent = message;
-  byId('booking-whatsapp').href = 'https://wa.me/79017515059?text=' + encodeURIComponent(message);
-}
-function openBooking(courseId, tariffId) {
+function openBooking() {
   lastFocused = document.activeElement;
   bookingModal.hidden = false;
-  bookingModal.setAttribute('aria-hidden','false');
-  bookingCourse.value = getCourse(courseId || selectedCourse).id;
-  populateTariffs(tariffId || 'trial');
+  bookingModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('is-locked');
-  bookingModal.querySelector('.modal-close').focus();
+  bookingModal.querySelector('.booking-max-link').focus();
 }
 function closeBooking() {
   bookingModal.hidden = true;
-  bookingModal.setAttribute('aria-hidden','true');
+  bookingModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('is-locked');
   if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
 }
 document.addEventListener('click', e => {
-  const opener = e.target.closest('[data-open-booking]');
-  if (opener) openBooking(opener.dataset.course, opener.dataset.tariff);
+  if (e.target.closest('[data-open-booking]')) openBooking();
   if (e.target.closest('[data-close-modal]')) closeBooking();
-});
-bookingCourse.addEventListener('change', () => populateTariffs());
-[bookingTariff,byId('booking-name'),byId('booking-note')].forEach(el => el.addEventListener('input', updateBookingMessage));
-
-function toast(message) {
-  const el = byId('toast');
-  el.textContent = message;
-  el.classList.add('visible');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('visible'), 3900);
-}
-function legacyCopy(text) {
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
-  const success = document.execCommand('copy');
-  textarea.remove();
-  return success;
-}
-byId('booking-vk').addEventListener('click', async () => {
-  const message = bookingText();
-  // Open immediately on user interaction to avoid popup blockers.
-  const tab = window.open('https://vk.me/lucheya','_blank');
-  if (tab) tab.opener = null;
-  let copied = false;
-  try { if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(message); copied = true; } else { copied = legacyCopy(message); } }
-  catch(e) { copied = legacyCopy(message); }
-  toast(copied ? 'Текст заявки скопирован — вставьте его в диалог ВКонтакте.' : 'Скопируйте текст заявки из поля выше и вставьте в диалог.');
-  if (!tab) toast(copied ? 'Текст скопирован. Откройте ВКонтакте и вставьте сообщение.' : 'Откройте ВКонтакте: vk.me/lucheya — текст заявки показан выше.');
 });
 
 bookingModal.addEventListener('keydown', e => {
