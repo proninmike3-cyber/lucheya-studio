@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+<defs><linearGradient id="wall" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ede1d3"/><stop offset="1" stop-color="#ccb5a4"/></linearGradient><linearGradient id="mirror" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e7e6dd"/><stop offset="1" stop-color="#b3b4b0"/></linearGradient><linearGradient id="floor" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#c1a58f"/><stop offset="1" stop-color="#947964"/></linearGradient></defs>
+<rect width="900" height="650" fill="url(#wall)"/><path d="M0 456h900v194H0Z" fill="url(#floor)"/><path d="M0 455h900" stroke="#917767" stroke-width="6"/>
+<rect x="94" y="63" width="265" height="366" rx="129" fill="#c9a88b"/><rect x="105" y="74" width="243" height="344" rx="117" fill="url(#mirror)"/><path d="M139 233h179m-173 47h168" stroke="#f4f3ed" stroke-opacity=".55" stroke-width="8"/>
+<rect x="528" y="63" width="265" height="366" rx="129" fill="#c9a88b"/><rect x="539" y="74" width="243" height="344" rx="117" fill="url(#mirror)"/><path d="M571 231h180m-171 51h161" stroke="#f4f3ed" stroke-opacity=".5" stroke-width="8"/>
+<g fill="#c7a690" stroke="#826757" stroke-width="5"><rect x="172" y="394" width="135" height="122" rx="28"/><rect x="606" y="394" width="135" height="122" rx="28"/></g>
+<g fill="#967564"><path d="M185 496h109v23H185ZM619 496h109v23H619Z"/><path d="M219 514h36v78h-36ZM653 514h36v78h-36Z"/></g><path d="M185 594h105m329 0h105" stroke="#6a5245" stroke-width="8" stroke-linecap="round"/>
+<path d="M435 460v-192m-60 192h120" stroke="#947963" stroke-width="12" stroke-linecap="round"/><path d="M399 277q30-120 64-10q45-75 74 10" fill="#839080"/><path d="M404 300q-54-76 7-113 33 40 17 113m31 10q18-119 89-102-1 83-89 102" fill="#6a796a"/><path d="M380 445h110l-18 77h-73Z" fill="#b7977e"/><path d="M369 449h130" stroke="#80614c" stroke-width="8"/>
+<g fill="#f4e4d2" opacity=".6"><circle cx="192" cy="90" r="8"/><circle cx="244" cy="57" r="6"/><circle cx="634" cy="90" r="8"/><circle cx="686" cy="57" r="6"/></g>
+</svg>
