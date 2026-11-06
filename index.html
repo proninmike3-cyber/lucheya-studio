@@ -498,6 +498,100 @@ byId('price-tabs').addEventListener('keydown', event => {
 document.querySelectorAll('[data-price-tab]').forEach(button => button.addEventListener('click', () => setPriceTab(button.dataset.priceTab, true)));
 setPriceTab('3-4');
 
+
+// Weekly lessons transcribed from the studio's published 2026–2027 timetable.
+// Recurring weekly lessons, not live availability: studio must confirm places.
+const weeklySchedule = [
+  {name:'Понедельник',short:'Пн',slots:[]},
+  {name:'Вторник',short:'Вт',slots:[
+    {course:'individual',title:'Индивидуальные занятия',time:'с 10:00',note:'Время по договорённости',tone:'age-individual'},
+    {course:'9-13',title:'Подготовка к художественной школе',time:'17:00–18:20',note:'9–13 лет',tone:'age-prep'},
+    {course:'adult',title:'Живопись маслом',time:'18:30–20:00',note:'Взрослые, 16+',tone:'age-adult'}
+  ]},
+  {name:'Среда',short:'Ср',slots:[
+    {course:'individual',title:'Индивидуальные занятия',time:'с 10:00',note:'Время по договорённости',tone:'age-individual'},
+    {course:'3-4',title:'Рисование',time:'17:30–18:10',note:'3–4 года',tone:'age-small'},
+    {course:'5-6',title:'Рисование',time:'18:30–19:30',note:'5–6 лет',tone:'age-small'}
+  ]},
+  {name:'Четверг',short:'Чт',slots:[
+    {course:'individual',title:'Индивидуальные занятия',time:'с 10:00',note:'Время по договорённости',tone:'age-individual'},
+    {course:'7-9',title:'Рисование',time:'17:00–18:20',note:'7–9 лет',tone:'age-school'},
+    {course:'9-13',title:'Подготовка к художественной школе',time:'18:30–19:50',note:'9–13 лет',tone:'age-prep'}
+  ]},
+  {name:'Пятница',short:'Пт',slots:[
+    {course:'individual',title:'Индивидуальные занятия',time:'с 10:00',note:'Время по договорённости',tone:'age-individual'},
+    {course:'9-13',title:'Подготовка к художественной школе',time:'17:00–18:20',note:'9–13 лет',tone:'age-prep'},
+    {course:'adult',title:'Живопись маслом',time:'18:30–20:00',note:'Взрослые, 16+',tone:'age-adult'}
+  ]},
+  {name:'Суббота',short:'Сб',slots:[
+    {course:'5-6',title:'Рисование',time:'10:40–11:40',note:'5–6 лет',tone:'age-small'},
+    {course:'3-4',title:'Рисование',time:'12:00–12:40',note:'3–4 года',tone:'age-small'},
+    {course:'7-9',title:'Рисование',time:'13:00–14:20',note:'7–9 лет',tone:'age-school'},
+    {course:'9-13',title:'Подготовка к художественной школе',time:'14:30–15:50',note:'9–13 лет',tone:'age-prep'}
+  ]},
+  {name:'Воскресенье',short:'Вс',slots:[
+    {course:'individual',title:'Индивидуальные занятия',time:'с 12:00',note:'Время по договорённости',tone:'age-individual'},
+    {course:'14-18',title:'Подготовка к поступлению в колледжи и вузы',time:'14:40–16:10',note:'14–18 лет',tone:'age-prep'},
+    {course:'adult',title:'Основы рисунка',time:'16:30–18:00',note:'Взрослые, 16+',tone:'age-adult'},
+    {course:'adult',title:'Живопись маслом',time:'18:30–20:00',note:'Взрослые, 16+',tone:'age-adult'}
+  ]}
+];
+
+const scheduleFilter = byId('schedule-filter');
+const scheduleGrid = byId('schedule-grid');
+const mobileScheduleDays = byId('schedule-mobile-days');
+const todayScheduleIndex = (new Date().getDay() + 6) % 7;
+let activeScheduleDay = todayScheduleIndex;
+
+const scheduleCountText = n => n === 0 ? 'без занятий' : (n === 1 ? '1 занятие' : n < 5 ? n + ' занятия' : n + ' занятий');
+function renderWeeklySchedule() {
+  const filter = scheduleFilter.value;
+  const isCurrentWeek = new Date().getFullYear() >= 2026 && new Date().getFullYear() <= 2027;
+  scheduleGrid.innerHTML = weeklySchedule.map((day,index) => {
+    const shown = day.slots.filter(item => filter === 'all' || item.course === filter);
+    const slotHTML = shown.map(item =>
+      '<button type="button" class="schedule-slot ' + item.tone + '" data-open-booking data-course="' + item.course +
+      '" data-tariff="' + (item.course === 'individual' ? 'single' : 'trial') +
+      '" aria-label="' + day.name + ', ' + item.time + ', ' + item.title + ', ' + item.note + '. Записаться">' +
+      '<span class="schedule-slot-time">' + item.time + '</span>' +
+      '<span class="schedule-slot-title">' + item.title + '</span>' +
+      '<span class="schedule-slot-sub">' + item.note + ' <span aria-hidden="true">↗</span></span></button>'
+    ).join('');
+    return '<div class="schedule-day' +
+      (index >= 5 ? ' is-weekend' : '') +
+      (isCurrentWeek && index === todayScheduleIndex ? ' is-today' : '') +
+      (index === activeScheduleDay ? ' is-active' : '') +
+      '" data-weekday="' + index + '">' +
+      '<div class="schedule-day-head"><span class="schedule-day-abbr">' + day.short.toUpperCase() +
+      '</span><span class="schedule-day-name">' + day.name +
+      '</span><span class="schedule-day-count">' + scheduleCountText(shown.length) + '</span></div>' +
+      '<div class="schedule-day-slots">' +
+      (slotHTML || '<div class="schedule-day-empty"><span aria-hidden="true">✳</span>На этот день занятий по выбранному направлению не указано</div>') +
+      '</div></div>';
+  }).join('');
+  mobileScheduleDays.innerHTML = weeklySchedule.map((day,index) =>
+    '<button type="button" class="schedule-mobile-day' + (index === activeScheduleDay ? ' is-active' : '') +
+    '" data-select-schedule-day="' + index + '" aria-pressed="' + (index === activeScheduleDay) +
+    '" aria-label="' + day.name + '">' + day.short + '</button>'
+  ).join('');
+}
+scheduleFilter.addEventListener('change', () => {
+  const firstMatchingDay = weeklySchedule.findIndex(day => day.slots.some(slot => scheduleFilter.value === 'all' || slot.course === scheduleFilter.value));
+  if (firstMatchingDay !== -1 && !weeklySchedule[activeScheduleDay].slots.some(slot => scheduleFilter.value === 'all' || slot.course === scheduleFilter.value)) {
+    activeScheduleDay = firstMatchingDay;
+  }
+  renderWeeklySchedule();
+});
+mobileScheduleDays.addEventListener('click', event => {
+  const control = event.target.closest('[data-select-schedule-day]');
+  if (!control) return;
+  activeScheduleDay = Number(control.dataset.selectScheduleDay);
+  renderWeeklySchedule();
+  const active = mobileScheduleDays.querySelector('.is-active');
+  if (active) active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+});
+renderWeeklySchedule();
+
 // Mobile menu
 const menuToggle = byId('menu-toggle');
 const nav = byId('site-nav');
